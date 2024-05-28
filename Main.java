@@ -43,7 +43,11 @@ public class Main {
         "Jl. Griya Taman Asri 8, Grojogan, Pandowoharjo, Kec. Sleman, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55512");
     // }
 
-    Transaksi<MobilSedan> t1 = new Transaksi<>(pb1, k2, new MobilSedan[] { ms1, ms2 });
-    Transaksi<MobilSedan> t2 = new Transaksi<>(pi1, k2, new MobilSedan[] { ms1, ms2 });
+    var t1 = new TransaksiBorongan(pb1, k1, new MobilSedan[] { ms1, ms2 });
+    var t2 = new TransaksiIndividu(pi1, k1, ms3);
+    var t3 = new TransaksiBorongan(pb2, k1, new MobilMinibus[] { mm1, mm2, mm3 });
+    var t4 = new TransaksiBorongan(pb3, k2, new MobilBus[] { mb1, mb3 });
+    var t5 = new TransaksiIndividu(pi2, k3, mb3);
+    var t6 = new TransaksiIndividu(pi3, k3, mb2);
   }
 }

@@ -6,7 +6,7 @@ public class Karyawan {
   /**
    * Transaksi yang merupakan tanggung jawab Karyawan.
    */
-  public ArrayList<Transaksi> transaksi = new ArrayList<Transaksi>();
+  public ArrayList<ATransaksi> transaksi = new ArrayList<ATransaksi>();
 
   public Karyawan(int id, String nama, String alamat) {
     this.id = id;
@@ -31,7 +31,7 @@ public class Karyawan {
    */
   public long getUntung() {
     long untung = 0;
-    for (Transaksi t : transaksi) {
+    for (ATransaksi t : transaksi) {
       for (AMobil m : t.mobil) {
         untung += m.harga * 10 / 100;
       }
@@ -45,7 +45,7 @@ public class Karyawan {
    * @param i Indeks transaksi dalam {@link #transaksi}.
    */
   public void cetakPembeli(int i) {
-    Transaksi t = transaksi.get(i);
+    ATransaksi t = transaksi.get(i);
     t.pembeli.biodata.cetak();
   }
 }

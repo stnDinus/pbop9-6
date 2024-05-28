@@ -7,11 +7,13 @@ import java.util.ArrayList;
  * Akan menimbulkan error jika memiliki tipe mobil yang berbeda (sesuai
  * instruksi modul PBO).
  *
- * Menggunakan warisan dari {@link AMobil} sebagai parameter generik agar tipe
- * mobil-mobil dalam satu objek transaksi terjamin sama.
+ * Menggunakan warisan eksklusif dari {@link AMobil} (dan bukan dirinya sendiri)
+ * sebagai parameter generik agar tipe mobil-mobil dalam satu objek transaksi
+ * terjamin sama. (lihat {@link #ATransaksi(Pembeli, Karyawan, AMobil[])
+ * konstruktor})
  */
-public class Transaksi<Mobil extends AMobil> {
-  public static ArrayList<Transaksi> riwayat = new ArrayList<Transaksi>();
+public abstract class ATransaksi<Mobil extends AMobil> {
+  public static ArrayList<ATransaksi> riwayat = new ArrayList<ATransaksi>();
 
   public Pembeli pembeli;
   public Karyawan karyawan;
@@ -19,13 +21,17 @@ public class Transaksi<Mobil extends AMobil> {
 
   /**
    * Konstruktor transaksi.
-   * Juga memanggil {@link #register()} saat inisialisasi.
+   * - Memanggil {@link #register()} saat inisialisasi.
+   * - Memastikan tipe mobil sama (eksklusif subclass dari {@link AMobil} dan
+   * bukan dirinya sendiri).
    *
    * @param pembeli  Pembeli transaksi.
    * @param karyawan Karyawan yang bertanggung jawab kepada transaski.
    * @param mobil    Himpunan mobil yang akan dibeli.
    */
-  public Transaksi(Pembeli pembeli, Karyawan karyawan, Mobil[] mobil) {
+  protected ATransaksi(Pembeli pembeli, Karyawan karyawan, Mobil[] mobil) {
+    if (mobil.getClass().equals(AMobil[].class))
+      throw new IllegalArgumentException();
     this.pembeli = pembeli;
     this.mobil = mobil;
     this.karyawan = karyawan;
@@ -36,7 +42,7 @@ public class Transaksi<Mobil extends AMobil> {
    * - Menambah transaksi ke riwayat.
    * - Menambah transaksi ke himpunan transaksi instansi karyawan.
    */
-  public void register() {
+  private void register() {
     riwayat.add(this);
     karyawan.transaksi.add(this);
   }
