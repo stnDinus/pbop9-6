@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Karyawan {
+  public static ArrayList<Karyawan> karyawan = new ArrayList<Karyawan>();
   public int id;
   protected Biodata biodata;
   /**
@@ -11,6 +12,7 @@ public class Karyawan {
   public Karyawan(int id, String nama, String alamat) {
     this.id = id;
     this.biodata = new Biodata(nama, alamat);
+    karyawan.add(this);
   }
 
   /**
