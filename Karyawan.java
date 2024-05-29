@@ -7,7 +7,7 @@ public class Karyawan {
   /**
    * Transaksi yang merupakan tanggung jawab Karyawan.
    */
-  public ArrayList<ATransaksi> transaksi = new ArrayList<ATransaksi>();
+  public ArrayList<ATransaksi<AMobil>> transaksi = new ArrayList<ATransaksi<AMobil>>();
 
   public Karyawan(int id, String nama, String alamat) {
     this.id = id;
@@ -33,7 +33,7 @@ public class Karyawan {
    */
   public long getUntung() {
     long untung = 0;
-    for (ATransaksi t : transaksi) {
+    for (ATransaksi<AMobil> t : transaksi) {
       for (AMobil m : t.mobil) {
         untung += m.harga * 10 / 100;
       }

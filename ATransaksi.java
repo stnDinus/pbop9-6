@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * konstruktor})
  */
 public abstract class ATransaksi<Mobil extends AMobil> {
-  public static ArrayList<ATransaksi> riwayat = new ArrayList<ATransaksi>();
+  public static ArrayList<ATransaksi<AMobil>> riwayat = new ArrayList<ATransaksi<AMobil>>();
 
   public Pembeli pembeli;
   public Karyawan karyawan;
@@ -43,8 +43,8 @@ public abstract class ATransaksi<Mobil extends AMobil> {
    * - Menambah transaksi ke himpunan transaksi instansi karyawan.
    */
   private void register() {
-    riwayat.add(this);
-    karyawan.transaksi.add(this);
+    riwayat.add((ATransaksi<AMobil>) this);
+    karyawan.transaksi.add((ATransaksi<AMobil>) this);
   }
 
   public long getTotal() {
