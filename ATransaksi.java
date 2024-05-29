@@ -42,6 +42,7 @@ public abstract class ATransaksi<Mobil extends AMobil> {
    * - Menambah transaksi ke riwayat.
    * - Menambah transaksi ke himpunan transaksi instansi karyawan.
    */
+  @SuppressWarnings("unchecked")
   private void register() {
     riwayat.add((ATransaksi<AMobil>) this);
     karyawan.transaksi.add((ATransaksi<AMobil>) this);
