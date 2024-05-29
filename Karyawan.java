@@ -40,14 +40,4 @@ public class Karyawan {
     }
     return untung;
   }
-
-  /**
-   * Cetak biodata pembeli dari sebuah transaksi.
-   *
-   * @param i Indeks transaksi dalam {@link #transaksi}.
-   */
-  public void cetakPembeli(int i) {
-    ATransaksi t = transaksi.get(i);
-    t.pembeli.biodata.cetak();
-  }
 }
