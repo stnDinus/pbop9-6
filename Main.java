@@ -1,13 +1,5 @@
-import java.text.NumberFormat;
-import java.util.Locale;
-
 public class Main {
   public static void main(String[] args) {
-    // Format mata uang {
-    Locale idloc = Locale.of("id");
-    NumberFormat cf = NumberFormat.getCurrencyInstance(idloc);
-    // }
-
     // Inisialisasi data {
     MobilSedan ms1 = new MobilSedan("Toyota", "Camry", 850_000_000);
     MobilSedan ms2 = new MobilSedan("Honda", "Accord", 787_000_000);
@@ -43,11 +35,40 @@ public class Main {
         "Jl. Griya Taman Asri 8, Grojogan, Pandowoharjo, Kec. Sleman, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55512");
     // }
 
-    var t1 = new TransaksiBorongan(pb1, k1, new MobilSedan[] { ms1, ms2 });
-    var t2 = new TransaksiIndividu(pi1, k1, ms3);
-    var t3 = new TransaksiBorongan(pb2, k1, new MobilMinibus[] { mm1, mm2, mm3 });
-    var t4 = new TransaksiBorongan(pb3, k2, new MobilBus[] { mb1, mb3 });
-    var t5 = new TransaksiIndividu(pi2, k3, mb3);
-    var t6 = new TransaksiIndividu(pi3, k3, mb2);
+    new TransaksiBorongan(pb1, k1, new MobilSedan[] { ms1, ms2 });
+    new TransaksiIndividu(pi1, k1, ms3);
+    new TransaksiBorongan(pb2, k1, new MobilMinibus[] { mm1, mm2, mm3 });
+    new TransaksiBorongan(pb3, k2, new MobilBus[] { mb1, mb3 });
+    new TransaksiIndividu(pi2, k3, mb3);
+    new TransaksiIndividu(pi3, k3, mb2);
+
+    System.out.println("# DAFTAR TRANSAKSI");
+    for (var t : ATransaksi.riwayat) {
+      var tb = t.pembeli.biodata;
+
+      System.out.println("\n## Rincian Transaksi");
+      System.out.println("- ID Karyawan:\t" + t.karyawan.id);
+      System.out.println("- Total:\t" + Lib.cf.format(t.getTotal()));
+      System.out.println("\n### Pembeli");
+      System.out.println("- Nama:\t\t" + tb.nama);
+      System.out.println("- Alamat:\t" + tb.alamat);
+      System.out.println("\n### Mobil Terjual");
+      for (var m : t.mobil) {
+        System.out.println("- " + m.id);
+        System.out.println("\t- Merek:\t" + m.merek);
+        System.out.println("\t- Nama:\t\t" + m.nama);
+        System.out.println("\t- Harga:\t" + Lib.cf.format(m.harga));
+      }
+    }
+
+    System.out.println("\n# DAFTAR KARYAWAN");
+    for (var k : Karyawan.karyawan) {
+      var b = k.biodata;
+      System.out.println("\n## Biodata");
+      System.out.println("- Nama:\t\t" + b.nama);
+      System.out.println("- Alamat:\t" + b.alamat);
+      System.out.println("- Transaksi:\t" + k.transaksi.size());
+      System.out.println("- Gaji:\t\t" + Lib.cf.format(k.getUntung()));
+    }
   }
 }
