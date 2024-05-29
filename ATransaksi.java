@@ -46,4 +46,12 @@ public abstract class ATransaksi<Mobil extends AMobil> {
     riwayat.add(this);
     karyawan.transaksi.add(this);
   }
+
+  public long getTotal() {
+    long t = 0;
+    for (var m : mobil) {
+      t += m.harga;
+    }
+    return t;
+  }
 }
